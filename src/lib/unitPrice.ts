@@ -4,6 +4,7 @@ export type ProductUnit = "個" | "g" | "kg" | "ml" | "L";
 export interface Product {
   id: string;
   name: string;
+  store?: string;
   price: number;
   amount: number;
   unit: ProductUnit;

@@ -43,6 +43,7 @@ const unitsByCategory: Record<ProductCategory, ProductUnit[]> = {
 function makeDraft(category: ProductCategory) {
   return {
     name: "",
+    store: "",
     price: "",
     amount: category === "count" ? "1" : "100",
     unit: unitsByCategory[category][0],
@@ -98,6 +99,7 @@ function App() {
             ? {
                 ...product,
                 name: draft.name.trim(),
+                store: draft.store.trim(),
                 price,
                 amount,
                 unit: draft.unit,
@@ -112,6 +114,7 @@ function App() {
         {
           id: globalThis.crypto.randomUUID(),
           name: draft.name.trim(),
+          store: draft.store.trim(),
           price,
           amount,
           unit: draft.unit,
@@ -126,6 +129,7 @@ function App() {
     setEditingProductId(product.id);
     setDraft({
       name: product.name,
+      store: product.store ?? "",
       price: String(product.price),
       amount: String(product.amount),
       unit: product.unit,
@@ -218,6 +222,21 @@ function App() {
                   value={draft.name}
                   onChange={(event) =>
                     setDraft({ ...draft, name: event.target.value })
+                  }
+                />
+              </label>
+
+              <label className="field">
+                <span>
+                  店名 <span className="optional">任意</span>
+                </span>
+                <input
+                  aria-label="店名"
+                  autoComplete="off"
+                  placeholder="例: ○○スーパー"
+                  value={draft.store}
+                  onChange={(event) =>
+                    setDraft({ ...draft, store: event.target.value })
                   }
                 />
               </label>
@@ -394,6 +413,9 @@ function App() {
                             <span className="best-badge">最安</span>
                           )}
                         </div>
+                        {product.store && (
+                          <p className="product-store">{product.store}</p>
+                        )}
                         <p className="product-details">
                           ¥{formatNumber(product.price)} <span>/</span>{" "}
                           {formatNumber(product.amount)}

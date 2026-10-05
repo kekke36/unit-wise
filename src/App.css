@@ -519,6 +519,15 @@ main {
   white-space: nowrap;
 }
 
+.product-store {
+  margin: 3px 0 0;
+  overflow: hidden;
+  color: #718b78;
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .best-badge {
   min-width: 36px;
   padding: 3px 6px;
