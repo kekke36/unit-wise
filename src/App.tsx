@@ -76,6 +76,11 @@ function App() {
   const bestValueIds = getBestValueIds(visibleProducts);
   const unitLabel =
     category === "count" ? "1個" : category === "weight" ? "100g" : "100ml";
+  const draftUnitPrice = calculateUnitPrice(
+    Number(draft.price),
+    Number(draft.amount),
+    draft.unit,
+  );
 
   function selectCategory(nextCategory: ProductCategory) {
     if (nextCategory === category) return;
@@ -274,6 +279,14 @@ function App() {
                     </select>
                   </span>
                 </label>
+              </div>
+
+              <div className="live-calculation" aria-live="polite">
+                <span className="live-calculation-label">{unitLabel}あたり</span>
+                <strong>
+                  <span>¥</span>
+                  {draftUnitPrice === null ? "—" : formatNumber(draftUnitPrice)}
+                </strong>
               </div>
 
               <div className="form-actions">
