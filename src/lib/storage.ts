@@ -13,6 +13,7 @@ function isProduct(value: unknown): value is Product {
   return (
     typeof product.id === "string" &&
     typeof product.name === "string" &&
+    (product.store === undefined || typeof product.store === "string") &&
     typeof product.price === "number" &&
     typeof product.amount === "number" &&
     ["個", "g", "kg", "ml", "L"].includes(product.unit ?? "")

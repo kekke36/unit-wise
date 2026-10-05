@@ -9,7 +9,8 @@
     "typecheck": "tsc -b --pretty",
     "lint": "oxlint",
     "test": "vitest run",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "check-all": "npm run typecheck && npm run lint && npm run test && npm run build"
   },
   "dependencies": {
     "lucide-react": "^1.52.0",
