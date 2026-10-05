@@ -45,7 +45,7 @@ function makeDraft(category: ProductCategory) {
     name: "",
     store: "",
     price: "",
-    amount: category === "count" ? "1" : "100",
+    amount: "",
     unit: unitsByCategory[category][0],
   };
 }
