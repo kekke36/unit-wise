@@ -140,11 +140,11 @@ function App() {
   return (
     <div className="app-shell">
       <header className="topbar">
-        <a className="brand" href="#top" aria-label="かいものメモ ホーム">
+        <a className="brand" href="#top" aria-label="UnitWise ホーム">
           <span className="brand-mark">
             <ShoppingBasket size={19} strokeWidth={2.2} />
           </span>
-          <span>かいものメモ</span>
+          <span>UnitWise</span>
         </a>
         <div className="save-indicator">
           <span className="save-dot" />
@@ -448,7 +448,7 @@ function App() {
       </main>
 
       <footer className="footer">
-        <span>かいものメモ</span>
+        <span>UnitWise</span>
         <span>あなたの買いものを、ちょっと賢く。</span>
       </footer>
     </div>
