@@ -16,8 +16,10 @@ import "./App.css";
 import {
   loadCategory,
   loadProducts,
+  loadStores,
   saveCategory,
   saveProducts,
+  saveStores,
 } from "./lib/storage";
 import {
   calculateUnitPrice,
@@ -57,14 +59,20 @@ function formatNumber(value: number): string {
 
 function App() {
   const [products, setProducts] = useState<Product[]>(loadProducts);
+  const [stores, setStores] = useState(() => loadStores(products));
   const [category, setCategory] = useState<ProductCategory>(loadCategory);
   const [draft, setDraft] = useState(() => makeDraft(loadCategory()));
+  const [newStoreName, setNewStoreName] = useState("");
   const [editingProductId, setEditingProductId] = useState<string | null>(null);
   const [isConfirmingClear, setIsConfirmingClear] = useState(false);
 
   useEffect(() => {
     saveProducts(products);
   }, [products]);
+
+  useEffect(() => {
+    saveStores(stores);
+  }, [stores]);
 
   useEffect(() => {
     saveCategory(category);
@@ -86,6 +94,19 @@ function App() {
     setCategory(nextCategory);
     setDraft(makeDraft(nextCategory));
     setEditingProductId(null);
+  }
+
+  function registerStore() {
+    const storeName = newStoreName.trim();
+    if (!storeName) return;
+
+    setStores((currentStores) =>
+      currentStores.includes(storeName)
+        ? currentStores
+        : [...currentStores, storeName],
+    );
+    setDraft((currentDraft) => ({ ...currentDraft, store: storeName }));
+    setNewStoreName("");
   }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -233,15 +254,20 @@ function App() {
                 <span>
                   店名 <span className="optional">任意</span>
                 </span>
-                <input
+                <select
                   aria-label="店名"
-                  autoComplete="off"
-                  placeholder="例: ○○スーパー"
                   value={draft.store}
                   onChange={(event) =>
                     setDraft({ ...draft, store: event.target.value })
                   }
-                />
+                >
+                  <option value="">店名を選択</option>
+                  {stores.map((store) => (
+                    <option key={store} value={store}>
+                      {store}
+                    </option>
+                  ))}
+                </select>
               </label>
 
               <div className="field-row">
@@ -467,6 +493,36 @@ function App() {
             )}
           </section>
         </div>
+
+        <section className="store-panel" aria-labelledby="store-title">
+          <div className="section-heading">
+            <div>
+              <p className="section-kicker">STORE LIST</p>
+              <h2 id="store-title">店名を登録</h2>
+            </div>
+          </div>
+          <div className="store-registration">
+            <label className="field">
+              <span>登録する店名</span>
+              <input
+                aria-label="登録する店名"
+                autoComplete="off"
+                placeholder="例: ○○スーパー"
+                value={newStoreName}
+                onChange={(event) => setNewStoreName(event.target.value)}
+              />
+            </label>
+            <button
+              className="submit-button"
+              disabled={!newStoreName.trim()}
+              type="button"
+              onClick={registerStore}
+            >
+              <Plus size={16} />
+              店名を登録
+            </button>
+          </div>
+        </section>
       </main>
 
       <footer className="footer">

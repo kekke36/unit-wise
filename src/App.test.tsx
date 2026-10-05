@@ -16,19 +16,31 @@ describe("shopping unit comparison", () => {
     const user = userEvent.setup();
     const { unmount } = render(<App />);
 
+    const storeSelect = screen.getByLabelText("店名");
+    expect(within(storeSelect).getByRole("option", { name: "OK" })).toBeTruthy();
+    expect(
+      within(storeSelect).getByRole("option", { name: "ドンキ" }),
+    ).toBeTruthy();
+
     await user.click(screen.getByRole("button", { name: /重量/ }));
     expect((screen.getByLabelText("内容量") as HTMLInputElement).value).toBe(
       "",
     );
     await user.type(screen.getByLabelText(/商品名/), "トマト");
-    await user.type(screen.getByLabelText("店名"), "青果スーパー");
+    await user.type(screen.getByLabelText("登録する店名"), "青果スーパー");
+    await user.click(screen.getByRole("button", { name: "店名を登録" }));
+    expect((screen.getByLabelText("店名") as HTMLSelectElement).value).toBe(
+      "青果スーパー",
+    );
     await user.type(screen.getByLabelText("価格"), "298");
     await user.clear(screen.getByLabelText("内容量"));
     await user.type(screen.getByLabelText("内容量"), "400");
     await user.click(screen.getByRole("button", { name: "商品を追加" }));
 
     expect(screen.getByText("トマト")).toBeTruthy();
-    expect(screen.getByText("青果スーパー")).toBeTruthy();
+    expect(
+      within(screen.getByRole("listitem")).getByText("青果スーパー"),
+    ).toBeTruthy();
     expect(screen.getByText(/74\.5/)).toBeTruthy();
     expect(screen.queryByText("最安")).toBeNull();
 
@@ -44,7 +56,14 @@ describe("shopping unit comparison", () => {
     unmount();
     render(<App />);
     expect(screen.getByText("トマト")).toBeTruthy();
-    expect(screen.getByText("青果スーパー")).toBeTruthy();
+    expect(
+      within(screen.getByRole("listitem")).getByText("青果スーパー"),
+    ).toBeTruthy();
+    expect(
+      within(screen.getByLabelText("店名")).getByRole("option", {
+        name: "青果スーパー",
+      }),
+    ).toBeTruthy();
     expect(screen.getByText(/99\.5/)).toBeTruthy();
     expect((screen.getByLabelText("内容量") as HTMLInputElement).value).toBe(
       "",

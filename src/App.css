@@ -188,7 +188,8 @@ main {
 }
 
 .entry-panel,
-.comparison-panel {
+.comparison-panel,
+.store-panel {
   min-width: 0;
   background: #fff;
   border: 1px solid var(--line);
@@ -201,6 +202,11 @@ main {
 
 .comparison-panel {
   padding: 22px 24px 16px;
+}
+
+.store-panel {
+  margin-top: 18px;
+  padding: 22px 24px 20px;
 }
 
 .section-heading {
@@ -241,6 +247,13 @@ main {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
+}
+
+.store-registration {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 8px;
 }
 
 .field {
@@ -362,6 +375,11 @@ main {
 
 .submit-button:hover {
   background: #174732;
+}
+
+.submit-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
 }
 
 .submit-button:active {
@@ -741,7 +759,8 @@ main {
   }
 
   .entry-panel,
-  .comparison-panel {
+  .comparison-panel,
+  .store-panel {
     padding: 18px 15px 14px;
   }
 
