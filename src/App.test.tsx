@@ -17,6 +17,9 @@ describe("shopping unit comparison", () => {
     const { unmount } = render(<App />);
 
     await user.click(screen.getByRole("button", { name: /重量/ }));
+    expect((screen.getByLabelText("内容量") as HTMLInputElement).value).toBe(
+      "",
+    );
     await user.type(screen.getByLabelText(/商品名/), "トマト");
     await user.type(screen.getByLabelText("店名"), "青果スーパー");
     await user.type(screen.getByLabelText("価格"), "298");
@@ -44,7 +47,7 @@ describe("shopping unit comparison", () => {
     expect(screen.getByText("青果スーパー")).toBeTruthy();
     expect(screen.getByText(/99\.5/)).toBeTruthy();
     expect((screen.getByLabelText("内容量") as HTMLInputElement).value).toBe(
-      "100",
+      "",
     );
 
     await user.click(screen.getByRole("button", { name: "トマトを削除" }));
