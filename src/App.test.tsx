@@ -30,7 +30,7 @@ describe("shopping unit comparison", () => {
     expect(screen.getByText("トマト")).toBeTruthy();
     expect(screen.getByText("青果スーパー")).toBeTruthy();
     expect(screen.getByText(/74\.5/)).toBeTruthy();
-    expect(screen.getByText("最安")).toBeTruthy();
+    expect(screen.queryByText("最安")).toBeNull();
 
     const productRow = screen.getByRole("listitem");
     await user.click(

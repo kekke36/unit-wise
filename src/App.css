@@ -519,26 +519,6 @@ main {
   white-space: nowrap;
 }
 
-.product-store {
-  margin: 3px 0 0;
-  overflow: hidden;
-  color: #718b78;
-  font-size: 11px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.best-badge {
-  min-width: 36px;
-  padding: 3px 6px;
-  color: #fff;
-  background: var(--coral);
-  border-radius: 3px;
-  font-size: 10px;
-  font-weight: 700;
-  text-align: center;
-}
-
 .product-details {
   margin: 4px 0 0;
   color: #87948b;
@@ -577,10 +557,6 @@ main {
   margin-right: 1px;
   color: #75887a;
   font-size: 13px;
-}
-
-.is-best .unit-price-block strong {
-  color: var(--green);
 }
 
 .product-actions {
@@ -642,21 +618,6 @@ main {
   margin: 0;
   color: #8a978e;
   font-size: 11px;
-}
-
-.comparison-footnote {
-  min-height: 34px;
-  margin-top: 3px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  color: #829087;
-  border-top: 1px solid #edf0ec;
-  font-size: 10px;
-}
-
-.comparison-footnote svg {
-  color: #3d8d62;
 }
 
 .footer {
@@ -812,12 +773,6 @@ main {
 
   .product-title-line h3 {
     font-size: 12px;
-  }
-
-  .best-badge {
-    min-width: 31px;
-    padding: 2px 4px;
-    font-size: 9px;
   }
 
   .product-details {

@@ -21,7 +21,6 @@ import {
 } from "./lib/storage";
 import {
   calculateUnitPrice,
-  getBestValueIds,
   getCategory,
   type Product,
   type ProductCategory,
@@ -74,7 +73,6 @@ function App() {
   const visibleProducts = products.filter(
     (product) => getCategory(product.unit) === category,
   );
-  const bestValueIds = getBestValueIds(visibleProducts);
   const unitLabel =
     category === "count" ? "1個" : category === "weight" ? "100g" : "100ml";
   const draftUnitPrice = calculateUnitPrice(
@@ -409,11 +407,10 @@ function App() {
                     product.amount,
                     product.unit,
                   );
-                  const isBestValue = bestValueIds.has(product.id);
 
                   return (
                     <li
-                      className={`product-row${isBestValue ? " is-best" : ""}`}
+                      className="product-row"
                       key={product.id}
                     >
                       <span className="product-rank">
@@ -422,9 +419,6 @@ function App() {
                       <div className="product-main">
                         <div className="product-title-line">
                           <h3>{product.name || "名前なし"}</h3>
-                          {isBestValue && (
-                            <span className="best-badge">最安</span>
-                          )}
                         </div>
                         {product.store && (
                           <p className="product-store">{product.store}</p>
@@ -470,13 +464,6 @@ function App() {
                   );
                 })}
               </ol>
-            )}
-
-            {visibleProducts.length > 1 && (
-              <div className="comparison-footnote">
-                <Check size={14} />
-                <span>単価が低い商品に「最安」を表示しています</span>
-              </div>
             )}
           </section>
         </div>
